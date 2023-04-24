@@ -1,0 +1,18 @@
+{
+  "type": "ars_nouveau:glyph",
+  "count": 1,
+  "exp": 27,
+  "inputItems": [
+    {
+      "item": {
+        "item": "minecraft:dirt"
+      }
+    },
+    {
+      "item": {
+        "item": "minecraft:iron_boots"
+      }
+    }
+  ],
+  "output": "ars_artifice:glyph_landing"
+}

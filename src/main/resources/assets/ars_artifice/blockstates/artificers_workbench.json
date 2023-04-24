@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=west,part=foot": {
+      "model": "ars_artifice:block/artificers_workbench_left"
+    },
+    "facing=west,part=head": {
+      "model": "ars_artifice:block/artificers_workbench_right"
+    },
+    "facing=east,part=foot": {
+      "model": "ars_artifice:block/artificers_workbench_left",
+      "y": 180
+    },
+    "facing=east,part=head": {
+      "model": "ars_artifice:block/artificers_workbench_right",
+      "y": 180
+    },
+    "facing=north,part=foot": {
+      "model": "ars_artifice:block/artificers_workbench_left",
+      "y": 90
+    },
+    "facing=north,part=head": {
+      "model": "ars_artifice:block/artificers_workbench_right",
+      "y": 90
+    },
+    "facing=south,part=foot": {
+      "model": "ars_artifice:block/artificers_workbench_left",
+      "y": 270
+    },
+    "facing=south,part=head": {
+      "model": "ars_artifice:block/artificers_workbench_right",
+      "y": 270
+    }
+  }
+}

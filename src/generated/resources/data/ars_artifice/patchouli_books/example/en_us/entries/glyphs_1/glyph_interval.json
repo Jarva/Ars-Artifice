@@ -1,0 +1,16 @@
+{
+  "category": "ars_nouveau:glyphs_1",
+  "icon": "ars_artifice:glyph_interval",
+  "name": "ars_artifice.glyph_name.glyph_interval",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ars_artifice.glyph_desc.glyph_interval"
+    },
+    {
+      "type": "ars_nouveau:glyph_recipe",
+      "recipe": "ars_artifice:glyph_interval"
+    }
+  ],
+  "sortnum": 3
+}
