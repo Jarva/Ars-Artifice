@@ -1,5 +1,7 @@
 # Ars Artifice
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Jarva/Ars-Artifice) ![CF Version](https://cf.way2muchnoise.eu/versions/854169_latest.svg) ![GitHub](https://img.shields.io/github/license/Jarva/Ars-Artifice)
+
 An Ars Nouveau addon that focuses primarily on introducing a new Artificing mechanic, allowing players to create Curios that automatically cast spells when certain events effect the player.
 
 Trello: <https://trello.com/b/I4KiHMIb/task-list>
