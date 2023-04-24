@@ -56,6 +56,11 @@ public class SpellGem extends Item implements ICasterTool {
     }
 
     @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         tooltipComponents.add(Component.literal("Durability: " + (stack.getMaxDamage()-stack.getDamageValue()) + " / " + stack.getMaxDamage()).withStyle(ChatFormatting.GRAY));
         ISpellCaster caster = getSpellCaster(stack);
