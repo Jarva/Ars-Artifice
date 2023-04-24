@@ -62,14 +62,15 @@ public class AnguishArtificeMethod extends AbstractArtificeMethod {
         curios.ifPresent(handler -> {
             for (int i = 0; i < handler.getSlots(); i++) {
                 ItemStack item = handler.getStackInSlot(i);
-                ISpellCaster caster = new ArtificerCurio.ArtificerCaster(item);
-                Spell artifice = caster.getSpell(0);
-                if (artifice.isEmpty()) continue;
-                AbstractArtificeMethod method = (AbstractArtificeMethod) artifice.recipe.get(0);
-                if (method instanceof AnguishArtificeMethod retaliateMethod) {
-                    SpellStats stats = retaliateMethod.getSpellStats(caster, entity, artifice);
-                    if ((retaliateMethod.THRESHOLD.get() + (stats.getAmpMultiplier()) * retaliateMethod.STEP.get()) <= event.getAmount()) {
-                        caster.castSpell(entity.level, entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), caster.getSpell(1));
+                if (item.getItem() instanceof ArtificerCurio) {
+                    ISpellCaster caster = new ArtificerCurio.ArtificerCaster(item);
+                    Spell artifice = caster.getSpell(0);
+                    if (artifice.isEmpty()) continue;
+                    if (artifice.recipe.get(0) instanceof AbstractArtificeMethod method && method instanceof AnguishArtificeMethod retaliateMethod) {
+                        SpellStats stats = retaliateMethod.getSpellStats(caster, entity, artifice);
+                        if ((retaliateMethod.THRESHOLD.get() + (stats.getAmpMultiplier()) * retaliateMethod.STEP.get()) <= event.getAmount()) {
+                            caster.castSpell(entity.level, entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), caster.getSpell(1));
+                        }
                     }
                 }
             }
