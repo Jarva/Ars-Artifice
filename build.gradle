@@ -6,7 +6,7 @@ plugins {
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
-version = project.mod_version
+version = "${project.minecraft_version}-${new File('version').text.trim()}"
 group = project.maven_group
 
 loom {

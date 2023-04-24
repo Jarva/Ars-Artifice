@@ -5,36 +5,52 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Publish on GitHub, CurseForge and Modrinth
 
 on:
-  push:
+  workflow_dispatch:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    inputs:
+      version:
+        description: 'Mod Version'
+        required: true
+        type: string
+
+env:
+  MINECRAFT_VERSION: 1.19.2
+  JAVA_VERSION: 17
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 17
+    - name: Set up JDK ${{ env.JAVA_VERSION }}
       uses: actions/setup-java@v3
       with:
-        java-version: '17'
+        java-version: ${{ env.JAVA_VERSION }}
         distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      uses: gradle/gradle-build-action@v2
       with:
-        arguments: build
-    - name: GitHub Release
-      uses: fnkr/github-action-ghr@v1.3
+        arguments: clean build
+    - shell: bash
       env:
-        GHR_PATH: build/lib
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+        VERSION: ${{ inputs.version }}
+      run:  |
+        echo "$VERSION" > version
+    - uses: Kir-Antipov/mc-publish@v3.2
+      with:
+        modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+        curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        version: ${{ inputs.version }}
+        game-versions: |
+          ${{ env.MINECRAFT_VERSION }}
+        version-resolver: exact
