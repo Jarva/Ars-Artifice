@@ -44,8 +44,7 @@ public class ArtificerCurio extends ArsNouveauCurio implements ICasterTool {
         ISpellCaster caster = getSpellCaster(stack);
         Spell artifice = caster.getSpell(0);
         if (artifice.isEmpty()) return;
-        AbstractArtificeMethod method = (AbstractArtificeMethod) artifice.recipe.get(0);
-        if (method instanceof TickableArtificeMethod tickable) {
+        if (artifice.recipe.get(0) instanceof AbstractArtificeMethod method && method instanceof TickableArtificeMethod tickable) {
             LivingEntity entity = slotContext.entity();
             SpellStats stats = method.getSpellStats(caster, entity, artifice);
             tickable.tick(entity, stack, caster, stats, caster.getSpell(1));
