@@ -45,6 +45,10 @@ jobs:
         VERSION: ${{ inputs.version }}
       run:  |
         echo "$VERSION" > version
+    - name: Commit & Push changes
+      uses: Andro999b/push@v1.3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - uses: Kir-Antipov/mc-publish@v3.2
       with:
         modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
