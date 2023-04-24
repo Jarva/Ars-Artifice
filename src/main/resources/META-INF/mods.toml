@@ -74,6 +74,3 @@ side="BOTH"
 ignore=false
 curseforge="ars-nouveau" # CurseForge's project slug
 
-[[custom.mcpublish]]
-modrinth="kMpXC38Q"
-curseforge=854169
