@@ -31,8 +31,6 @@ public class ImbuementProvider extends ImbuementRecipeProvider {
 
     public void addEntries() {
         recipes.add(new ImbuementRecipe("spell_gem_upgrade_t1", Ingredient.of(ItemsRegistry.SOURCE_GEM), new ItemStack(ModRegistry.SPELL_GEM_1.get()), 1000).withPedestalItem(ItemsRegistry.SPELL_PARCHMENT));
-//        recipes.add(new ImbuementRecipe("spell_gem_upgrade_t2", Ingredient.of(ModRegistry.SPELL_GEM_1.get()), new ItemStack(ModRegistry.SPELL_GEM_2.get()), 2000).withPedestalItem(ItemsRegistry.SPELL_PARCHMENT));
-//        recipes.add(new ImbuementRecipe("spell_gem_upgrade_t3", Ingredient.of(ModRegistry.SPELL_GEM_2.get()), new ItemStack(ModRegistry.SPELL_GEM_3.get()), 4000).withPedestalItem(ItemsRegistry.SPELL_PARCHMENT));
     }
 
     protected Path getRecipePath(Path pathIn, String str) {

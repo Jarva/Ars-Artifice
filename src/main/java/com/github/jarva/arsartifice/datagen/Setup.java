@@ -23,6 +23,8 @@ public class Setup {
 
         gen.addProvider(event.includeServer(), new PatchouliProvider(gen));
         gen.addProvider(event.includeServer(), new LangDatagen(gen, root, "en_us"));
+        gen.addProvider(event.includeServer(), new RecipeProvider(gen));
+        gen.addProvider(event.includeServer(), new DefaultLootProvider(gen));
     }
 
 }

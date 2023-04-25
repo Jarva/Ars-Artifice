@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "w": {
+      "item": "minecraft:iron_ingot"
+    },
+    "x": {
+      "item": "ars_nouveau:archwood_slab"
+    },
+    "y": {
+      "item": "ars_nouveau:scribes_table"
+    },
+    "z": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "pattern": [
+    "xyx",
+    "z z",
+    "w w"
+  ],
+  "result": {
+    "item": "ars_artifice:artificers_workbench"
+  }
+}
