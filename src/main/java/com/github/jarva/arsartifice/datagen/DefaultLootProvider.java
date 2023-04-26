@@ -1,7 +1,9 @@
 package com.github.jarva.arsartifice.datagen;
 
+import com.github.jarva.arsartifice.block.ArtificersWorkbenchBlock;
 import com.github.jarva.arsartifice.registry.AddonBlockRegistry;
 import com.google.common.collect.ImmutableList;
+import com.hollingsworth.arsnouveau.common.block.ThreePartBlock;
 import com.hollingsworth.arsnouveau.common.datagen.DefaultTableProvider;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.DataGenerator;
@@ -23,7 +25,7 @@ public class DefaultLootProvider extends DefaultTableProvider {
     public static class BlockLootTableProvider extends BlockLootTable {
         @Override
         protected void addTables() {
-            registerDropSelf(AddonBlockRegistry.ARTIFICER_TABLE_BLOCK);
+            registerBedCondition(AddonBlockRegistry.ARTIFICER_TABLE_BLOCK, ArtificersWorkbenchBlock.PART, ThreePartBlock.HEAD);
         }
     }
 
