@@ -28,11 +28,7 @@ displayName = "Ars Artifice"
 # authors="Me!" #optional
 # A multi-line description for your mod. This has no minimum length, but it *is* required!
 description = '''
-This is a very cool mod that does... things.
-
-...and stuff.
-
-Have I reached 280 characters yet?
+Ars Artifice focuses primarily on a new Artificing mechanic, allowing players to create curios that automatically cast spells when certain events effect the player.
 '''
 
 # An (optional) dependency for your mod. Though technically not required,
