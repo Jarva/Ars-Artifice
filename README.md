@@ -6,7 +6,7 @@ An Ars Nouveau addon that focuses primarily on introducing a new Artificing mech
 
 Trello: <https://trello.com/b/I4KiHMIb/task-list>
 
-Modrinth: <https://modrinth.com/mod/ars-artifice> Pending Approval  
+Modrinth: <https://modrinth.com/mod/ars-artifice>    
 CurseForge: <https://legacy.curseforge.com/minecraft/mc-mods/ars-artifice/>
 
 There's currently 4 artifice methods introduced:
