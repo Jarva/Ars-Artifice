@@ -46,6 +46,8 @@ jobs:
       with:
         arguments: clean build
     - uses: GuillaumeFalourd/git-commit-push@v1.3
+      with:
+        commit_message: "ci: bump version"
     - uses: Kir-Antipov/mc-publish@v3.2
       with:
         modrinth-id: kMpXC38Q
