@@ -1,0 +1,18 @@
+{
+    "ars_artifice.glyph_desc.glyph_anguish": "Angústia desencadeia quando você recebe dano. Amplificar aumenta o dano necessário para desencadear. Amortecer reduz o dano necessário para desencadear.",
+    "ars_artifice.glyph_desc.glyph_falling": "Caindo desencadeia após a queda. Amplificar aumenta a quantidade de blocos a cair antes do acionamento. O amortecimento reduz a quantidade de blocos a cair antes do acionamento.",
+    "ars_artifice.glyph_desc.glyph_interval": "Intervalo de gatilhos em um loop. Amplificar aumenta a duração entre os gatilhos. Redução reduz a duração entre os gatilhos.",
+    "ars_artifice.glyph_desc.glyph_landing": "Aterrissagem é acionado quando você aterrissa. Amplificar aumenta a distância que você precisa ter caído para ser acionado.",
+    "ars_artifice.glyph_name.glyph_angústia": "Angústia",
+    "ars_artifice.glyph_name.glyph_falling": "Caindo",
+    "ars_artifice.glyph_name.glyph_interval": "Intervalo",
+    "ars_artifice.glyph_name.glyph_landing": "Aterrissagem",
+    "ars_artifice.spell_gem.invalid": "Há problemas com este feitiço.",
+    "block.ars_artifice.artificers_workbench": "Bancada do Artífice",
+    "item.ars_artifice.spell_gem_t1": "Joia mágica",
+    "item.ars_artifice.spell_gem_t2": "Joia mágica",
+    "item.ars_artifice.spell_gem_t3": "Joia mágica",
+    "item.ars_artifice.spell_storing_amulet": "Amuleto de armazenamento de feitiços",
+    "item.ars_artifice.spell_storing_belt": "Cinto de armazenamento de feitiços",
+    "item.ars_artifice.spell_storing_ring": "Anel de armazenamento de feitiços"
+}
