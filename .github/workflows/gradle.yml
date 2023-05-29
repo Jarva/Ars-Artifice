@@ -39,11 +39,10 @@ jobs:
         VERSION: ${{ inputs.version }}
       run: |
         echo "$VERSION" > version
-        mkdir -p /home/runner/.gradle/caches/fabric-loom/assets
     - name: Setup and Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: clean runData build
+        arguments: clean build
     - uses: GuillaumeFalourd/git-commit-push@v1.3
       with:
         commit_message: "ci: bump version"
