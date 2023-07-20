@@ -57,6 +57,17 @@ public class ArtificeCreationMenu extends BaseBook {
         IPlayerCap cap = CapabilityRegistry.getPlayerDataCap(Minecraft.getInstance().player).orElse(null);
         unlockedSpells = cap == null ? new ArrayList<>() : new ArrayList<>(cap.getKnownGlyphs().stream().filter(AbstractSpellPart::isEnabled).toList());
         unlockedSpells.addAll(api.getDefaultStartingSpells());
+        unlockedSpells = unlockedSpells.stream()
+                .filter(s -> s instanceof AbstractArtificeMethod || s instanceof AbstractAugment)
+                .collect(Collectors.toList());
+        unlockedSpells = unlockedSpells.stream()
+                .filter(s -> {
+                    if (s instanceof AbstractAugment) {
+                        return unlockedSpells.stream().anyMatch(part -> part.compatibleAugments.contains(s));
+                    }
+                    return true;
+                })
+                .collect(Collectors.toList());
 
         held = Minecraft.getInstance().player.getItemInHand(hand);
         this.spellValidator = new CombinedArtificeValidator();
@@ -94,7 +105,7 @@ public class ArtificeCreationMenu extends BaseBook {
             this.prevButton.active = false;
             this.prevButton.visible = false;
         }
-        if (page == getNumPages() - 1) {
+        if (page == getNumPages() - 1 || getNumPages() <= 2) {
             this.nextButton.active = false;
             this.nextButton.visible = false;
         }
@@ -178,9 +189,7 @@ public class ArtificeCreationMenu extends BaseBook {
     public void layoutAllGlyphs(int page) {
         clearButtons(glyphButtons);
 
-        List<AbstractSpellPart> filtered = new ArrayList<>(unlockedSpells.stream()
-                .filter(s -> s instanceof AbstractArtificeMethod || s instanceof AbstractAugment)
-                .toList());
+        List<AbstractSpellPart> filtered = new ArrayList<>(unlockedSpells);
         filtered.sort(COMPARE_TYPE_THEN_NAME);
         List<AbstractSpellPart> sorted = filtered.subList(glyphsPerPage * page, Math.min(filtered.size(), glyphsPerPage * (page + 1)));
         Map<Integer, List<AbstractSpellPart>> partitioned = sorted.stream().collect(Collectors.groupingBy(AbstractSpellPart::getTypeIndex));

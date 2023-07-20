@@ -42,7 +42,7 @@ jobs:
     - name: Setup and Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: clean build
+        arguments: clean runData build
     - uses: GuillaumeFalourd/git-commit-push@v1.3
       with:
         commit_message: "ci: bump version"

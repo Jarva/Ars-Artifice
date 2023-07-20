@@ -79,8 +79,7 @@ dependencies {
     modCompileOnlyApi "mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}"
     modCompileOnlyApi "mezz.jei:jei-${project.minecraft_version}-forge-api:${project.jei_version}"
 
-    modRuntimeOnly "mezz.jei:jei-${project.minecraft_version}-common:${project.jei_version}"
-    modRuntimeOnly "mezz.jei:jei-${project.minecraft_version}-forge:${project.jei_version}"
+    modRuntimeOnly("mezz.jei:jei-${project.minecraft_version}-forge:${project.jei_version}") { transitive = false }
 
     modImplementation "top.theillusivec4.curios:curios-forge:${project.minecraft_version}-${project.curios_version}"
     modImplementation "com.github.glitchfiend:TerraBlender-forge:${project.minecraft_version}-${project.terrablender_version}"
