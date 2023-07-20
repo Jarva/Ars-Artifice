@@ -39,7 +39,7 @@ jobs:
         VERSION: ${{ inputs.version }}
       run: |
         echo "$VERSION" > version
-        mkdir ~/.gradle/caches/fabric-loom/assets
+        mkdir -p ~/.gradle/caches/fabric-loom/assets
     - name: Setup and Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
