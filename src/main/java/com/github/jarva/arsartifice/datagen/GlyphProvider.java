@@ -6,8 +6,8 @@ import com.github.jarva.arsartifice.glyphs.IntervalArtificeMethod;
 import com.github.jarva.arsartifice.glyphs.LandingArtificeMethod;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.GlyphRecipe;
 import com.hollingsworth.arsnouveau.common.datagen.GlyphRecipeProvider;
-import com.hollingsworth.arsnouveau.common.potions.ModPotions;
-import com.hollingsworth.arsnouveau.setup.ItemsRegistry;
+import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
+import com.hollingsworth.arsnouveau.setup.registry.ModPotions;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -18,10 +18,9 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
-import static com.hollingsworth.arsnouveau.api.RegistryHelper.getRegistryName;
+import static com.hollingsworth.arsnouveau.setup.registry.RegistryHelper.getRegistryName;
 
 public class GlyphProvider extends GlyphRecipeProvider {
 
@@ -30,11 +29,10 @@ public class GlyphProvider extends GlyphRecipeProvider {
     }
 
     @Override
-    public void run(CachedOutput cache) throws IOException {
+    public void collectJsons(CachedOutput cache) {
         addEntries();
-        Path output = this.generator.getOutputFolder();
         for (GlyphRecipe recipe : recipes) {
-            Path path = getScribeGlyphPath(output, recipe.output.getItem());
+            Path path = getScribeGlyphPath(this.output, recipe.output.getItem());
             DataProvider.saveStable(cache, recipe.asRecipe(), path);
         }
     }

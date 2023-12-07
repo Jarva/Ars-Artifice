@@ -2,8 +2,8 @@
 	"credit": "Made by Ropeh (discord: Ropeh#6666) using Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "ars_artifice:blocks/artificers_workbench",
-		"particle": "ars_artifice:blocks/artificers_workbench"
+		"0": "ars_artifice:block/artificers_workbench",
+		"particle": "ars_artifice:block/artificers_workbench"
 	},
 	"elements": [
 		{

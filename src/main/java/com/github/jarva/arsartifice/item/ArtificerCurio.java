@@ -90,7 +90,7 @@ public class ArtificerCurio extends ArsNouveauCurio implements ICasterTool {
 
         @Override
         public InteractionResultHolder<ItemStack> castSpell(Level worldIn, LivingEntity entity, InteractionHand handIn, @org.jetbrains.annotations.Nullable Component invalidMessage, @NotNull Spell spell) {
-            spell.addDiscount(-spell.getNoDiscountCost());
+//            spell.addDiscount(-spell.getCost());
             return super.castSpell(worldIn, entity, handIn, invalidMessage, spell);
         }
     }

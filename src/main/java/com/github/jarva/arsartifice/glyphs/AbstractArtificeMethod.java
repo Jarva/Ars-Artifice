@@ -4,8 +4,6 @@ import com.hollingsworth.arsnouveau.api.spell.*;
 import com.hollingsworth.arsnouveau.api.spell.wrapped_caster.IWrappedCaster;
 import com.hollingsworth.arsnouveau.api.spell.wrapped_caster.LivingCaster;
 import com.hollingsworth.arsnouveau.api.spell.wrapped_caster.PlayerCaster;
-import com.hollingsworth.arsnouveau.common.spell.augment.AugmentDurationDown;
-import com.hollingsworth.arsnouveau.common.spell.augment.AugmentExtendTime;
 import com.hollingsworth.arsnouveau.common.spell.augment.AugmentSensitive;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -36,10 +34,10 @@ public abstract class AbstractArtificeMethod extends AbstractSpellPart {
 
     public SpellStats getSpellStats(ISpellCaster caster, LivingEntity entity, Spell spell) {
         IWrappedCaster wrapped = entity instanceof Player player ? new PlayerCaster(player) : new LivingCaster(entity);
-        SpellContext context = new SpellContext(entity.level, caster.modifySpellBeforeCasting(entity.level, entity, InteractionHand.MAIN_HAND, spell), entity, wrapped);
+        SpellContext context = new SpellContext(entity.level(), caster.modifySpellBeforeCasting(entity.level(), entity, InteractionHand.MAIN_HAND, spell), entity, wrapped);
         SpellStats stats = new SpellStats.Builder().setAugments(spell.getAugments(0, entity))
                 .addItemsFromEntity(entity)
-                .build(this, null, entity.level, entity, context);
+                .build(this, null, entity.level(), entity, context);
         return stats;
     }
 }

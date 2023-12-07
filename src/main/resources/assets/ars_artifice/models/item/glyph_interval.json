@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "ars_artifice:items/glyph_interval"
+    "layer0": "ars_artifice:item/glyph_interval"
   }
 }

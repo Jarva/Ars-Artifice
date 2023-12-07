@@ -1,7 +1,7 @@
 package com.github.jarva.arsartifice.client.gui;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
@@ -18,12 +18,12 @@ public class PlainTextLabel extends AbstractWidget {
     }
 
     @Override
-    public void renderButton(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        this.font.draw(poseStack, this.message, this.x, this.y, this.color);
+    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        graphics.drawString(this.font, this.message, this.getX(), this.getY(), this.color, false);
     }
 
     @Override
-    public void updateNarration(NarrationElementOutput narrationElementOutput) {
+    protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
         this.defaultButtonNarrationText(narrationElementOutput);
     }
 }

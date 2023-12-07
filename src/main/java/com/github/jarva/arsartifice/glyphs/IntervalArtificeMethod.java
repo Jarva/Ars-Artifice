@@ -47,8 +47,8 @@ public class IntervalArtificeMethod extends AbstractArtificeMethod implements Ti
     @Override
     public void tick(LivingEntity entity, ItemStack stack, ISpellCaster caster, SpellStats stats, Spell spell) {
         int duration = (int) (INTERVAL.get() + (stats.getDurationMultiplier() * STEP.get()));
-        if (entity.getLevel().getGameTime() % duration != 0) return;
-        caster.castSpell(entity.level, entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), spell);
+        if (entity.level().getGameTime() % duration != 0) return;
+        caster.castSpell(entity.level(), entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), spell);
     }
 
     @Override

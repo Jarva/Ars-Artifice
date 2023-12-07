@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import java.util.Optional;
 import java.util.Set;
@@ -58,8 +59,9 @@ public class AnguishArtificeMethod extends AbstractArtificeMethod {
     @SubscribeEvent
     public static void onEntityDamage(LivingDamageEvent event) {
         LivingEntity entity = event.getEntity();
-        Optional<IItemHandlerModifiable> curios = CuriosApi.getCuriosHelper().getEquippedCurios(entity).resolve();
-        curios.ifPresent(handler -> {
+        Optional<ICuriosItemHandler> curios = CuriosApi.getCuriosInventory(entity).resolve();
+        curios.ifPresent(curiosHandler -> {
+            IItemHandlerModifiable handler = curiosHandler.getEquippedCurios();
             for (int i = 0; i < handler.getSlots(); i++) {
                 ItemStack item = handler.getStackInSlot(i);
                 if (item.getItem() instanceof ArtificerCurio) {
@@ -69,7 +71,7 @@ public class AnguishArtificeMethod extends AbstractArtificeMethod {
                     if (artifice.recipe.get(0) instanceof AbstractArtificeMethod method && method instanceof AnguishArtificeMethod retaliateMethod) {
                         SpellStats stats = retaliateMethod.getSpellStats(caster, entity, artifice);
                         if ((retaliateMethod.THRESHOLD.get() + (stats.getAmpMultiplier()) * retaliateMethod.STEP.get()) <= event.getAmount()) {
-                            caster.castSpell(entity.level, entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), caster.getSpell(1));
+                            caster.castSpell(entity.level(), entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), caster.getSpell(1));
                         }
                     }
                 }

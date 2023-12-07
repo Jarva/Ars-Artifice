@@ -6,6 +6,7 @@ import com.github.jarva.arsartifice.glyphs.AnguishArtificeMethod;
 import com.github.jarva.arsartifice.glyphs.LandingArtificeMethod;
 import com.github.jarva.arsartifice.registry.ModRegistry;
 import com.hollingsworth.arsnouveau.api.ArsNouveauAPI;
+import com.hollingsworth.arsnouveau.api.registry.GlyphRegistry;
 import com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ArsNouveauRegistry {
     }
 
     public static void register(AbstractSpellPart spellPart){
-        ArsNouveauAPI.getInstance().registerSpell(spellPart);
+        GlyphRegistry.registerSpell(spellPart);
         registeredSpells.add(spellPart);
     }
 }

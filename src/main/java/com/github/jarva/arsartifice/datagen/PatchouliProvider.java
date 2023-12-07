@@ -15,10 +15,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.ItemLike;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
-import static com.hollingsworth.arsnouveau.api.RegistryHelper.getRegistryName;
+import static com.hollingsworth.arsnouveau.setup.registry.RegistryHelper.getRegistryName;
 
 public class PatchouliProvider extends com.hollingsworth.arsnouveau.common.datagen.PatchouliProvider {
 
@@ -27,7 +26,7 @@ public class PatchouliProvider extends com.hollingsworth.arsnouveau.common.datag
     }
 
     @Override
-    public void run(CachedOutput cache) throws IOException {
+    public void collectJsons(CachedOutput cache) {
 
         for (AbstractSpellPart spell : ArsNouveauRegistry.registeredSpells) {
             addGlyphPage(spell);
@@ -81,7 +80,7 @@ public class PatchouliProvider extends com.hollingsworth.arsnouveau.common.datag
     }
 
     public void addGlyphPage(AbstractSpellPart spellPart) {
-        ResourceLocation category = switch (spellPart.getTier().value) {
+        ResourceLocation category = switch (spellPart.defaultTier().value) {
             case 1 -> GLYPHS_1;
             case 2 -> GLYPHS_2;
             default -> GLYPHS_3;
@@ -97,7 +96,7 @@ public class PatchouliProvider extends com.hollingsworth.arsnouveau.common.datag
 
     @Override
     public Path getPath(ResourceLocation category, String fileName) {
-        return this.generator.getOutputFolder().resolve("data/" + Setup.root + "/patchouli_books/example/en_us/entries/" + category.getPath() + "/" + fileName + ".json");
+        return this.output.resolve("assets/" + Setup.root + "/patchouli_books/example/en_us/entries/" + category.getPath() + "/" + fileName + ".json");
     }
 
     ImbuementPage ImbuementPage(ItemLike item) {

@@ -1,6 +1,5 @@
 package com.github.jarva.arsartifice.item;
 
-import com.hollingsworth.arsnouveau.ArsNouveau;
 import com.hollingsworth.arsnouveau.api.item.ICasterTool;
 import com.hollingsworth.arsnouveau.api.spell.ISpellCaster;
 import com.hollingsworth.arsnouveau.api.spell.Spell;
@@ -23,7 +22,7 @@ import java.util.List;
 public class SpellGem extends Item implements ICasterTool {
 
     public SpellGem(int durability) {
-        super(new Item.Properties().durability(durability).tab(ArsNouveau.itemGroup));
+        super(new Item.Properties().durability(durability));
     }
 
     @Override
@@ -49,7 +48,7 @@ public class SpellGem extends Item implements ICasterTool {
         InteractionHand handIn = livingEntity.getUsedItemHand();
         InteractionResultHolder<ItemStack> holder = caster.castSpell(level, livingEntity, handIn, Component.translatable("ars_artifice.spell_gem.invalid"), spell);
         if (holder.getResult() == InteractionResult.CONSUME) {
-            stack.hurtAndBreak(spell.getDiscountedCost(), livingEntity, (e) -> {
+            stack.hurtAndBreak(spell.getCost(), livingEntity, (e) -> {
                 e.broadcastBreakEvent(handIn);
             });
         }

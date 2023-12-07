@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "ars_artifice:items/spell_storing_amulet"
+    "layer0": "ars_artifice:item/spell_storing_amulet"
   }
 }

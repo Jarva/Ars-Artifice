@@ -3,14 +3,13 @@ package com.github.jarva.arsartifice.datagen;
 import com.github.jarva.arsartifice.registry.ModRegistry;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.ImbuementRecipe;
 import com.hollingsworth.arsnouveau.common.datagen.ImbuementRecipeProvider;
-import com.hollingsworth.arsnouveau.setup.ItemsRegistry;
+import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 public class ImbuementProvider extends ImbuementRecipeProvider {
@@ -20,11 +19,10 @@ public class ImbuementProvider extends ImbuementRecipeProvider {
     }
 
     @Override
-    public void run(CachedOutput cache) throws IOException {
+    public void collectJsons(CachedOutput cache) {
         addEntries();
-        Path output = generator.getOutputFolder();
         for (ImbuementRecipe g : recipes) {
-            Path path = getRecipePath(output, g.getId().getPath());
+            Path path = getRecipePath(this.output, g.getId().getPath());
             DataProvider.saveStable(cache, g.asRecipe(), path);
         }
     }

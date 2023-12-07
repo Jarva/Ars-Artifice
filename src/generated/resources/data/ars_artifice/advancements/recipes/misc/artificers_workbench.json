@@ -30,5 +30,6 @@
     "recipes": [
       "ars_artifice:artificers_workbench"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

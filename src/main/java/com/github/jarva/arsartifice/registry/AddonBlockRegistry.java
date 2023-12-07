@@ -12,7 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
-import static com.hollingsworth.arsnouveau.setup.ItemsRegistry.defaultItemProperties;
+import static com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry.defaultItemProperties;
 
 public class AddonBlockRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ArsNouveau.MODID);

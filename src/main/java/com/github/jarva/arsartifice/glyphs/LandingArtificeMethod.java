@@ -54,7 +54,7 @@ public class LandingArtificeMethod extends AbstractArtificeMethod implements Tic
     public void tick(LivingEntity entity, ItemStack stack, ISpellCaster caster, SpellStats stats, Spell spell) {
         int distance = (int) (DISTANCE.get() + (stats.getAmpMultiplier() * STEP.get()));
         if (!triggered && entity.fallDistance == 0 && previousDistance >= distance) {
-            InteractionResultHolder<ItemStack> result = caster.castSpell(entity.level, entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), spell);
+            InteractionResultHolder<ItemStack> result = caster.castSpell(entity.level(), entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), spell);
             if (result.getResult() == InteractionResult.SUCCESS) {
                 triggered = true;
             }
