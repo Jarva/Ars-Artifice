@@ -8,10 +8,10 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = ArsArtifice.MODID)
+@Mod.EventBusSubscriber(modid = ArsArtifice.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Events {
     @SubscribeEvent
-    public void buildContents(BuildCreativeModeTabContentsEvent event) {
+    public static void buildContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeTabRegistry.BLOCKS.getKey()) {
             event.accept(ModRegistry.SPELL_GEM_1);
             event.accept(ModRegistry.SPELL_GEM_2);
