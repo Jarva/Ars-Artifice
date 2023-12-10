@@ -9,7 +9,6 @@ import com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart;
 import com.hollingsworth.arsnouveau.common.datagen.patchouli.*;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -35,7 +34,7 @@ public class PatchouliProvider extends com.hollingsworth.arsnouveau.common.datag
         //check the superclass for examples
 
         for (PatchouliPage patchouliPage : pages) {
-            DataProvider.saveStable(cache, patchouliPage.build(), patchouliPage.path());
+            saveStable(cache, patchouliPage.build(), patchouliPage.path());
         }
 
     }

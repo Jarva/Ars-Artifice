@@ -1,0 +1,16 @@
+{
+  "category": "ars_nouveau:glyphs_1",
+  "icon": "ars_artifice:glyph_landing",
+  "name": "ars_artifice.glyph_name.glyph_landing",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ars_artifice.glyph_desc.glyph_landing"
+    },
+    {
+      "type": "ars_nouveau:glyph_recipe",
+      "recipe": "ars_artifice:glyph_landing"
+    }
+  ],
+  "sortnum": 3
+}

@@ -1,0 +1,24 @@
+{
+  "type": "ars_artifice:no_damage_enchantment",
+  "keepNbtOfReagent": false,
+  "output": {
+    "item": "ars_artifice:spell_gem_t3"
+  },
+  "pedestalItems": [
+    {
+      "tag": "forge:storage_blocks/source"
+    },
+    {
+      "tag": "forge:storage_blocks/source"
+    },
+    {
+      "tag": "forge:storage_blocks/source"
+    }
+  ],
+  "reagent": [
+    {
+      "item": "ars_artifice:spell_gem_t2"
+    }
+  ],
+  "sourceCost": 5000
+}

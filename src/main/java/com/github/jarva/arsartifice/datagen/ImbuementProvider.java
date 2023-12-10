@@ -6,7 +6,6 @@ import com.hollingsworth.arsnouveau.common.datagen.ImbuementRecipeProvider;
 import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -22,8 +21,8 @@ public class ImbuementProvider extends ImbuementRecipeProvider {
     public void collectJsons(CachedOutput cache) {
         addEntries();
         for (ImbuementRecipe g : recipes) {
-            Path path = getRecipePath(this.output, g.getId().getPath());
-            DataProvider.saveStable(cache, g.asRecipe(), path);
+            Path path = getRecipePath(output, g.getId().getPath());
+            saveStable(cache, g.asRecipe(), path);
         }
     }
 

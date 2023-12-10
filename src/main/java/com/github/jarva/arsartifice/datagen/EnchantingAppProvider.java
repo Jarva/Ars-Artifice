@@ -8,7 +8,6 @@ import com.hollingsworth.arsnouveau.common.datagen.RecipeDatagen;
 import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -31,10 +30,8 @@ public class EnchantingAppProvider extends ApparatusRecipeProvider {
     public void collectJsons(CachedOutput cache) {
         addEntries();
         for (EnchantingApparatusRecipe g : recipes) {
-            if (g != null) {
-                Path path = getRecipePath(this.output, g.getId().getPath());
-                DataProvider.saveStable(cache, g.asRecipe(), path);
-            }
+            Path path = getRecipePath(output, g.getId().getPath());
+            saveStable(cache, g.asRecipe(), path);
         }
     }
 
