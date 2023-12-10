@@ -4,19 +4,20 @@ import com.github.jarva.arsartifice.glyphs.AnguishArtificeMethod;
 import com.github.jarva.arsartifice.glyphs.FallingArtificeMethod;
 import com.github.jarva.arsartifice.glyphs.IntervalArtificeMethod;
 import com.github.jarva.arsartifice.glyphs.LandingArtificeMethod;
+import com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.GlyphRecipe;
 import com.hollingsworth.arsnouveau.common.datagen.GlyphRecipeProvider;
 import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import com.hollingsworth.arsnouveau.setup.registry.ModPotions;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 
 import java.nio.file.Path;
 
@@ -32,16 +33,28 @@ public class GlyphProvider extends GlyphRecipeProvider {
     public void collectJsons(CachedOutput cache) {
         addEntries();
         for (GlyphRecipe recipe : recipes) {
-            Path path = getScribeGlyphPath(this.output, recipe.output.getItem());
-            DataProvider.saveStable(cache, recipe.asRecipe(), path);
+            Path path = getScribeGlyphPath(output, recipe.output.getItem());
+            saveStable(cache, recipe.asRecipe(), path);
         }
     }
 
     public void addEntries() {
-        add(get(AnguishArtificeMethod.INSTANCE).withItem(Items.SHIELD).withIngredient(getPotionIngredient(ModPotions.DEFENCE_POTION.get())));
-        add(get(FallingArtificeMethod.INSTANCE).withItem(Items.FEATHER).withIngredient(getPotionIngredient(Potions.SLOW_FALLING)));
-        add(get(IntervalArtificeMethod.INSTANCE).withItem(Items.CLOCK).withItem(ItemsRegistry.SOURCE_GEM));
-        add(get(LandingArtificeMethod.INSTANCE).withItem(Items.DIRT).withItem(Items.IRON_BOOTS));
+        addRecipe(AnguishArtificeMethod.INSTANCE, i(Items.SHIELD), getPotionIngredient(ModPotions.DEFENCE_POTION.get()));
+        addRecipe(FallingArtificeMethod.INSTANCE, i(Items.FEATHER), getPotionIngredient(Potions.SLOW_FALLING));
+        addRecipe(IntervalArtificeMethod.INSTANCE, i(Items.CLOCK), i(ItemsRegistry.SOURCE_GEM));
+        addRecipe(LandingArtificeMethod.INSTANCE, i(Items.DIRT), i(Items.IRON_BOOTS));
+    }
+
+    public Ingredient i(ItemLike item) {
+        return Ingredient.of(item);
+    }
+
+    public void addRecipe(AbstractSpellPart part, Ingredient... items) {
+        GlyphRecipe recipe = get(part);
+        for (Ingredient item : items ) {
+            recipe.withIngredient(item);
+        }
+        recipes.add(recipe);
     }
 
     public Ingredient getPotionIngredient(Potion potion) {
