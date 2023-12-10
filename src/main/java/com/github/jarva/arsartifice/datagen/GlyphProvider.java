@@ -18,6 +18,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.crafting.StrictNBTIngredient;
 
 import java.nio.file.Path;
 
@@ -58,7 +59,7 @@ public class GlyphProvider extends GlyphRecipeProvider {
     }
 
     public Ingredient getPotionIngredient(Potion potion) {
-        return Ingredient.of(PotionUtils.setPotion(Items.POTION.getDefaultInstance(), potion));
+        return StrictNBTIngredient.of(PotionUtils.setPotion(Items.POTION.getDefaultInstance(), potion));
     }
 
     protected static Path getScribeGlyphPath(Path pathIn, Item glyph) {

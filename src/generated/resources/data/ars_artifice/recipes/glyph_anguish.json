@@ -10,7 +10,10 @@
     },
     {
       "item": {
-        "item": "minecraft:potion"
+        "type": "forge:nbt",
+        "count": 1,
+        "item": "minecraft:potion",
+        "nbt": "{Potion:\"ars_nouveau:shielding_potion\"}"
       }
     }
   ],
