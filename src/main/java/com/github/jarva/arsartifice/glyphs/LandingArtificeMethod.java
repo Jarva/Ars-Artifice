@@ -31,11 +31,6 @@ public class LandingArtificeMethod extends AbstractArtificeMethod implements Tic
     }
 
     @Override
-    public Component getBookDescLang() {
-        return super.getBookDescLang();
-    }
-
-    @Override
     public String getBookDescription() {
         return "Landing triggers when you land. Amplify increases the distance you need to have fallen for it to trigger.";
     }
