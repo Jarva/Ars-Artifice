@@ -2,7 +2,10 @@ package com.github.jarva.arsartifice.glyphs;
 
 import com.github.jarva.arsartifice.ArsArtifice;
 import com.github.jarva.arsartifice.item.ArtificerCurio;
-import com.hollingsworth.arsnouveau.api.spell.*;
+import com.hollingsworth.arsnouveau.api.spell.AbstractAugment;
+import com.hollingsworth.arsnouveau.api.spell.ISpellCaster;
+import com.hollingsworth.arsnouveau.api.spell.Spell;
+import com.hollingsworth.arsnouveau.api.spell.SpellStats;
 import com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify;
 import com.hollingsworth.arsnouveau.common.spell.augment.AugmentDampen;
 import net.minecraft.network.chat.Component;
@@ -19,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.Set;
 
@@ -56,6 +60,10 @@ public class AnguishArtificeMethod extends AbstractArtificeMethod {
         return augmentSetOf(AugmentAmplify.INSTANCE, AugmentDampen.INSTANCE);
     }
 
+    public double getDamageThreshold(double amplifier) {
+        return THRESHOLD.get() + (amplifier * STEP.get());
+    }
+
     @SubscribeEvent
     public static void onEntityDamage(LivingDamageEvent event) {
         LivingEntity entity = event.getEntity();
@@ -70,12 +78,18 @@ public class AnguishArtificeMethod extends AbstractArtificeMethod {
                     if (artifice.isEmpty()) continue;
                     if (artifice.recipe.get(0) instanceof AbstractArtificeMethod method && method instanceof AnguishArtificeMethod retaliateMethod) {
                         SpellStats stats = retaliateMethod.getSpellStats(caster, entity, artifice);
-                        if ((retaliateMethod.THRESHOLD.get() + (stats.getAmpMultiplier()) * retaliateMethod.STEP.get()) <= event.getAmount()) {
+                        if (retaliateMethod.getDamageThreshold(stats.getAmpMultiplier()) <= event.getAmount()) {
                             caster.castSpell(entity.level(), entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), caster.getSpell(1));
                         }
                     }
                 }
             }
         });
+    }
+
+    @Override
+    public Component getMeta(HashMap<AbstractAugment, Integer> augments) {
+        double amp = getAmpMultiplier(augments);
+        return format(getDamageThreshold(amp), "damage");
     }
 }

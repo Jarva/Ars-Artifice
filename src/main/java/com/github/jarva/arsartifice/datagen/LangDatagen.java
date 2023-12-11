@@ -36,5 +36,11 @@ public class LangDatagen extends LanguageProvider {
         this.add("ars_artifice.spell_gem.invalid", "There are problems with this spell.");
 
         this.add("ars_nouveau.spell.validation.adding.starting_artifice_method", "The spell must start with an artifice method glyph.");
+
+        this.add("ars_artifice.tooltip.trigger", "Trigger");
+        this.add("ars_artifice.tooltip.spell", "Spell");
+        this.add("ars_artifice.tooltip.blocks", "(%1$s blocks)");
+        this.add("ars_artifice.tooltip.seconds", "(%1$s seconds)");
+        this.add("ars_artifice.tooltip.damage", "(%1$s damage)");
     }
 }

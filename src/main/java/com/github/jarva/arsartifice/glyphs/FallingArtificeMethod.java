@@ -18,6 +18,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import static com.github.jarva.arsartifice.ArsArtifice.prefix;
@@ -51,9 +52,13 @@ public class FallingArtificeMethod extends AbstractArtificeMethod implements Tic
 
     public boolean triggered = false;
 
+    public double getFallingThreshold(double amplifier) {
+        return DISTANCE.get() + (amplifier * STEP.get());
+    }
+
     @Override
     public void tick(LivingEntity entity, ItemStack stack, ISpellCaster caster, SpellStats stats, Spell spell) {
-        int distance = (int) (DISTANCE.get() + (stats.getAmpMultiplier() * STEP.get()));
+        double distance = getFallingThreshold(stats.getAmpMultiplier());
         if (!triggered && entity.fallDistance >= distance) {
             InteractionResultHolder<ItemStack> result = caster.castSpell(entity.level(), entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), spell);
             if (result.getResult() == InteractionResult.SUCCESS) {
@@ -68,5 +73,11 @@ public class FallingArtificeMethod extends AbstractArtificeMethod implements Tic
     @Override
     protected @NotNull Set<AbstractAugment> getCompatibleAugments() {
         return augmentSetOf(AugmentAmplify.INSTANCE, AugmentDampen.INSTANCE);
+    }
+
+    @Override
+    public Component getMeta(HashMap<AbstractAugment, Integer> augments) {
+        double amp = getAmpMultiplier(augments);
+        return format(getFallingThreshold(amp), "blocks");
     }
 }

@@ -6,6 +6,7 @@ import com.hollingsworth.arsnouveau.api.spell.ISpellCaster;
 import com.hollingsworth.arsnouveau.api.spell.Spell;
 import com.hollingsworth.arsnouveau.api.spell.SpellStats;
 import com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify;
+import com.hollingsworth.arsnouveau.common.spell.augment.AugmentExtendTime;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -17,6 +18,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import static com.github.jarva.arsartifice.ArsArtifice.prefix;
@@ -26,6 +28,11 @@ public class LandingArtificeMethod extends AbstractArtificeMethod implements Tic
     public static LandingArtificeMethod INSTANCE = new LandingArtificeMethod(prefix("glyph_landing"), "Landing");
     public LandingArtificeMethod(ResourceLocation tag, String description) {
         super(tag, description);
+    }
+
+    @Override
+    public Component getBookDescLang() {
+        return super.getBookDescLang();
     }
 
     @Override
@@ -50,9 +57,13 @@ public class LandingArtificeMethod extends AbstractArtificeMethod implements Tic
     public boolean triggered = false;
     public float previousDistance = 0;
 
+    public double getDistanceThreshold(double amplifier) {
+        return DISTANCE.get() + (amplifier * STEP.get());
+    }
+
     @Override
     public void tick(LivingEntity entity, ItemStack stack, ISpellCaster caster, SpellStats stats, Spell spell) {
-        int distance = (int) (DISTANCE.get() + (stats.getAmpMultiplier() * STEP.get()));
+        double distance = getDistanceThreshold (stats.getAmpMultiplier());
         if (!triggered && entity.fallDistance == 0 && previousDistance >= distance) {
             InteractionResultHolder<ItemStack> result = caster.castSpell(entity.level(), entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), spell);
             if (result.getResult() == InteractionResult.SUCCESS) {
@@ -68,5 +79,11 @@ public class LandingArtificeMethod extends AbstractArtificeMethod implements Tic
     @Override
     protected @NotNull Set<AbstractAugment> getCompatibleAugments() {
         return augmentSetOf(AugmentAmplify.INSTANCE);
+    }
+
+    @Override
+    public Component getMeta(HashMap<AbstractAugment, Integer> augments) {
+        double distance = getDistanceThreshold(augments.getOrDefault(AugmentExtendTime.INSTANCE, 0));
+        return format(distance, "blocks");
     }
 }

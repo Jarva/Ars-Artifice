@@ -7,6 +7,7 @@ import com.hollingsworth.arsnouveau.api.item.ICasterTool;
 import com.hollingsworth.arsnouveau.api.spell.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
 
 public class ArtificerCurio extends ArsNouveauCurio implements ICasterTool {
@@ -51,6 +53,37 @@ public class ArtificerCurio extends ArsNouveauCurio implements ICasterTool {
         }
     }
 
+    public Component getDisplayString(Spell spell) {
+        MutableComponent str = Component.empty();
+
+        for (int i = 0; i < spell.recipe.size(); i++) {
+            AbstractSpellPart spellPart = spell.recipe.get(i);
+            if (spellPart instanceof AbstractAugment) continue;
+            HashMap<AbstractAugment, Integer> augments = new HashMap<>();
+            for (int j = i +1; j < spell.recipe.size(); j++) {
+                if (spell.recipe.get(j) instanceof AbstractAugment augment) {
+                    augments.compute(augment, (k, v) -> v == null ? 1 : v + 1);
+                } else {
+                    break;
+                }
+            }
+
+            str.append(spellPart.getLocaleName());
+            if (spellPart instanceof AbstractArtificeMethod artificeMethod) {
+                str.append(" ").append(artificeMethod.getMeta(augments));
+            } else {
+                augments.forEach((augment, num) -> {
+                    str.append(augment.getLocaleName()).append(" x").append(String.valueOf(num));
+                });
+            }
+            if (i < spell.recipe.size() - augments.size() - 1) {
+                str.append(" -> ");
+            }
+        }
+
+        return str;
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip2, TooltipFlag flagIn) {
         if (worldIn == null)
@@ -59,12 +92,12 @@ public class ArtificerCurio extends ArsNouveauCurio implements ICasterTool {
         ISpellCaster caster = getSpellCaster(stack);
         Spell method = caster.getSpell(0);
         if (method.isValid()) {
-            tooltip2.add(Component.literal("Trigger: " + method.getDisplayString()));
+            tooltip2.add(Component.translatable("ars_artifice.tooltip.trigger").append(": ").append(getDisplayString(method)));
         }
 
         Spell spell = caster.getSpell(1);
         if (spell.isValid()) {
-            tooltip2.add(Component.literal("Spell: " + spell.getDisplayString()));
+            tooltip2.add(Component.translatable("ars_artifice.tooltip.spell").append(": ").append(spell.getDisplayString()));
         }
 
         super.appendHoverText(stack, worldIn, tooltip2, flagIn);

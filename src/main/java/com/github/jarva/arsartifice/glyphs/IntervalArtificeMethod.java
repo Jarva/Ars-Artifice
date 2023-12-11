@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import static com.github.jarva.arsartifice.ArsArtifice.prefix;
@@ -44,9 +45,17 @@ public class IntervalArtificeMethod extends AbstractArtificeMethod implements Ti
         STEP = builder.comment("Interval change step, in seconds").defineInRange("step", 1, 1, Integer.MAX_VALUE);
     }
 
+    public double getDuration(double duration) {
+        return INTERVAL.get() + (duration * STEP.get()) * 20;
+    }
+
+    public double getDurationTicks(double duration) {
+        return getDuration(duration) * 20;
+    }
+
     @Override
     public void tick(LivingEntity entity, ItemStack stack, ISpellCaster caster, SpellStats stats, Spell spell) {
-        int duration = (int) (INTERVAL.get() + (stats.getDurationMultiplier() * STEP.get()));
+        double duration = getDurationTicks(stats.getDurationMultiplier());
         if (entity.level().getGameTime() % duration != 0) return;
         caster.castSpell(entity.level(), entity, InteractionHand.MAIN_HAND, Component.translatable("ars_nouveau.spell.validation.crafting.invalid"), spell);
     }
@@ -54,5 +63,11 @@ public class IntervalArtificeMethod extends AbstractArtificeMethod implements Ti
     @Override
     protected @NotNull Set<AbstractAugment> getCompatibleAugments() {
         return augmentSetOf(AugmentExtendTime.INSTANCE, AugmentDurationDown.INSTANCE);
+    }
+
+    @Override
+    public Component getMeta(HashMap<AbstractAugment, Integer> augments) {
+        double duration = getDurationMultiplier(augments);
+        return format(getDuration(duration), "seconds");
     }
 }
