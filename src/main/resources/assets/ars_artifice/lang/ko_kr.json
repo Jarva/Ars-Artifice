@@ -1,0 +1,19 @@
+{
+    "ars_artifice.glyph_desc.glyph_anguish": "고통은 당신이 피해를 입을 때 발동됩니다. 증폭은 발동을 위해 필요한 피해를 증가시킵니다. 감쇠는 발동을 위해 필요한 피해를 줄입니다.",
+    "ars_artifice.glyph_desc.glyph_falling": "추락은 떨어진 후 발동됩니다. 증폭은 발동되기 전 떨어져야 하는 블록 수를 증가시킵니다. 감쇠는 발동되기 전 떨어져야 하는 블록 수를 줄입니다.",
+    "ars_artifice.glyph_desc.glyph_interval": "간격은 루프에서 발동됩니다. 증폭은 발동 간의 지속 시간을 증가시킵니다. 감쇠는 발동 간의 지속 시간을 줄입니다.",
+    "ars_artifice.glyph_desc.glyph_landing": "착지는 착지할 때 발동됩니다. 증폭은 발동을 위해 떨어져야 하는 거리를 증가시킵니다.",
+    "ars_artifice.glyph_name.glyph_anguish": "고통",
+    "ars_artifice.glyph_name.glyph_falling": "추락",
+    "ars_artifice.glyph_name.glyph_interval": "간격",
+    "ars_artifice.glyph_name.glyph_landing": "착지",
+    "ars_artifice.spell_gem.invalid": "이 주문에 문제가 있습니다.",
+    "ars_nouveau.spell.validation.adding.starting_artifice_method": "주문은 유물 형태 상형문자로 시작해야 합니다.",
+    "block.ars_artifice.artificers_workbench": "유물 제작자의 작업대",
+    "item.ars_artifice.spell_gem_t1": "주문 보석",
+    "item.ars_artifice.spell_gem_t2": "주문 보석",
+    "item.ars_artifice.spell_gem_t3": "주문 보석",
+    "item.ars_artifice.spell_storing_amulet": "주문 저장 아뮬렛",
+    "item.ars_artifice.spell_storing_belt": "주문 저장 벨트",
+    "item.ars_artifice.spell_storing_ring": "주문 저장 반지"
+}
