@@ -60,9 +60,9 @@ public class LandingArtificeMethod extends AbstractArtificeMethod implements Tic
             }
         }
         if (triggered && entity.fallDistance >= 0) {
-            previousDistance = entity.fallDistance;
             triggered = false;
         }
+        previousDistance = entity.fallDistance;
     }
 
     @Override
